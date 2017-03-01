@@ -1,3 +1,4 @@
+
 //
 // Created by Drak-pa on 2017/03/01.
 //
@@ -7,8 +8,12 @@
 
 #include "globalIncludes.h"
 
-typedef enum {node,feuille,nul} NodeType;
-typedef enum {num,nil,symbol,string,boolean} FeuilleType;
+typedef enum {Node,Feuille,Nul} NodeType;
+typedef enum {Boolean,Pair,Symbol,Number,Character,String,Vector,Procedure} FeuilleType;
+/*
+ * Les types pair indiquent qu'il n'y a normalement que deux feuilles trouvables dans le fils droit du noeud parent de cette feuille. Si c'est faux, alors on a une erreur.
+ * Les types vecteurs indiquent que les elements contenus dans le fils droit du noeud parent de cette feuille constituent les elements d'une liste.
+ */
 
 struct CharNode{
   char key;
@@ -16,20 +21,20 @@ struct CharNode{
 };
 typedef struct CharNode* String_t;
 
-typedef enum{false,true} bool;
+typedef enum{False,True} bool;
 
 typedef struct{
   FeuilleType fType; // type de la feuille
-  
   String_t str; // valeur brute sous forme de String_t
-  bool bVal; // valeur booleenne (false = 0, true = 1)
+  char c; // valeur de la feuille s'ill s'agit d'un char
+  bool b; // valeur booleenne (false = 0, true = 1)
   float f; // valeur float du rationnel
   struct{
-    int num; // numérateur de la fraction du
+    int num; // numerateur de la fraction du
     int den; // denominateur
   };
-} Feuille;
-typedef Feuille* Feuille_t;
+} Feuil;
+typedef Feuil* Feuille_t;
 
 struct Node{
   NodeType nType; // type du noeud
