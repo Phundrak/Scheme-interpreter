@@ -5,14 +5,15 @@
 #include "predicates.h"
 
 List car(List n){
-    return n->g;
+  return n->g;
 }
 List cdr(List n){
-    return n->d;
+  return n->d;
 }
 List cons(List elem, List liste){
-    List p = malloc(sizeof(struct Node));
-    p->d = elem;
-    p->g = liste;
-    return p;
+  // creation d'un  nouveau noeud, elem devient son fils gauche, liste son fils droit
+  List p = malloc(sizeof(struct Node));
+  p->g = elem;
+  p->d = liste;
+  return p;
 }

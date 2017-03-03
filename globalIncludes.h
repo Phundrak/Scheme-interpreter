@@ -7,5 +7,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "structure.h"
+
+extern Feuille_t userFunc;
+extern Feuille_t predicats;
 
 #endif //SCHEME_INTERPRETER_GLOBALINCLUDES_H

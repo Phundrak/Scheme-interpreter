@@ -8,11 +8,22 @@
 
 #include "globalIncludes.h"
 
+/********************************************************************************
+ *
+ * Data Structure
+ *
+ *******************************************************************************/
+
+typedef enum{False,True} bool;
 typedef enum {Noeud,Feuille,Nul} NodeType;
-typedef enum {Boolean,Pair,Symbol,Number,Character,String,Vector,Procedure} FeuilleType;
+typedef enum {Boolean,Pair,Vector,Symbol,Number,Character,String,Procedure} FeuilleType;
+
 /*
- * Les types pair indiquent qu'il n'y a normalement que deux feuilles trouvables dans le fils droit du noeud parent de cette feuille. Si c'est faux, alors on a une erreur.
- * Les types vecteurs indiquent que les elements contenus dans le fils droit du noeud parent de cette feuille constituent les elements d'une liste.
+ * Les types pair indiquent qu'il n'y a normalement que deux feuilles trouvables
+ * dans le fils droit du noeud parent de cette feuille. Si c'est faux, alors on a
+ * une erreur.
+ * Les types vecteurs indiquent que les elements contenus dans le fils droit du
+ * noeud parent de cette feuille constituent les elements d'une liste.
  */
 
 struct CharNode{
@@ -21,9 +32,8 @@ struct CharNode{
 };
 typedef struct CharNode* String_t;
 
-typedef enum{False,True} bool;
 
-typedef struct{
+struct Leaf{
   FeuilleType fType; // type de la feuille
   String_t str; // valeur brute sous forme de String_t
   union{
@@ -33,7 +43,9 @@ typedef struct{
   };
   int num; // numerateur de la fraction du rationnel
   int den; // denominateur de la fraction du rationnel
-} Feuil;
+  // le membre functPtr ne doit etre utilise que si la feuille est une procedure
+};
+typedef struct Leaf Feuil;
 typedef Feuil* Feuille_t;
 
 struct Node{
@@ -44,6 +56,13 @@ struct Node{
 };
 typedef struct Node* Node_t;
 typedef Node_t List;
+
+/********************************************************************************
+ *
+ * Functions
+ *
+ *******************************************************************************/
+
 
 
 #endif //SCHEME_INTERPRETER_STRUCTURE_H
