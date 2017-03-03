@@ -8,7 +8,7 @@
 
 #include "globalIncludes.h"
 
-typedef enum {Node,Feuille,Nul} NodeType;
+typedef enum {Noeud,Feuille,Nul} NodeType;
 typedef enum {Boolean,Pair,Symbol,Number,Character,String,Vector,Procedure} FeuilleType;
 /*
  * Les types pair indiquent qu'il n'y a normalement que deux feuilles trouvables dans le fils droit du noeud parent de cette feuille. Si c'est faux, alors on a une erreur.
@@ -26,13 +26,13 @@ typedef enum{False,True} bool;
 typedef struct{
   FeuilleType fType; // type de la feuille
   String_t str; // valeur brute sous forme de String_t
-  char c; // valeur de la feuille s'ill s'agit d'un char
-  bool b; // valeur booleenne (false = 0, true = 1)
-  float f; // valeur float du rationnel
-  struct{
-    int num; // numerateur de la fraction du
-    int den; // denominateur
+  union{
+    char c; // valeur de la feuille s'ill s'agit d'un char
+    bool b; // valeur booleenne (false = 0, true = 1)
+    float f; // valeur float du rationnel
   };
+  int num; // numerateur de la fraction du rationnel
+  int den; // denominateur de la fraction du rationnel
 } Feuil;
 typedef Feuil* Feuille_t;
 
