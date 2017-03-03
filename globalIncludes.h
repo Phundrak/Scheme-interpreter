@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "structure.h"
 
-extern Feuille_t userFunc;
-extern Feuille_t predicats;
+extern struct Leaf* userFunc;
+extern struct Leaf* predicats;
 
 #endif //SCHEME_INTERPRETER_GLOBALINCLUDES_H
