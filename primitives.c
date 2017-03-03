@@ -2,7 +2,7 @@
 // Created by Drak-pa on 2017/03/01.
 //
 
-#include "predicates.h"
+#include "primitives.h"
 
 List car(List n){
   return n->g;

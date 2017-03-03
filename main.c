@@ -1,6 +1,6 @@
 #include "globalIncludes.h"
 #include "structure.h"
-#include "predicates.h"
+#include "primitives.h"
 
 #define NIL -1
 
