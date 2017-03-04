@@ -40,9 +40,9 @@ struct Leaf{
     char c; // valeur de la feuille s'ill s'agit d'un char
     bool b; // valeur booleenne (false = 0, true = 1)
     float f; // valeur float du rationnel
+    int num; // DEPRECATED, numerateur de la fraction du rationnel
   };
-  int num; // numerateur de la fraction du rationnel
-  int den; // denominateur de la fraction du rationnel
+  int den; // DEPRECATED, denominateur de la fraction du rationnel
   // le membre functPtr ne doit etre utilise que si la feuille est une procedure
 };
 typedef struct Leaf Feuil;

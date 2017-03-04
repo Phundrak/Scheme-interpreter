@@ -51,14 +51,10 @@ Feuille_t createElemLeaf(String_t str){
   leaf->f = 0;
   leaf->num = 0;
   leaf->den = 1;
+
   if(True == strIsNum(str)) { // si str represente un nombre, on initialise les membres associes
     leaf->fType = Number;
-    if(True == strIsFloat(str)){ // si un point est detecte, alors la valeur est stockee en tant que float
-      leaf->f = strToFloat(str);
-    } else{
-      leaf->num = strToInt(str); // sinon on conserve la valeur dans le float ainsi que dans le rationnel
-      leaf->f = strToFloat(str);
-    }
+    leaf->f = strToFloat(str);
   } else if(True == strIsBool(str)){ // si le string vaut "#f" ou "#t" on l'interpretera comme etant une valeur booleenne
     leaf->fType = Boolean;
     leaf->b = strToBool(str);

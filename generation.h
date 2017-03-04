@@ -18,6 +18,9 @@ Feuille_t createElemLeaf(String_t);
 // cree un noeud ayant pour role une feuille
 Node_t createLeaf(String_t);
 
+// create a pair node with tw
+Node_t createPair_f(Feuille_t, Feuille_t);
+
 // cree un noeud Nul
 Node_t createNulNode(void);
 
