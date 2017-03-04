@@ -57,7 +57,7 @@ Feuille_t createElemLeaf(String_t str){
       leaf->f = strToFloat(str);
     } else{
       leaf->num = strToInt(str); // sinon on conserve la valeur dans le float ainsi que dans le rationnel
-      leaf->f = leaf->num;
+      leaf->f = strToFloat(str);
     }
   } else if(True == strIsBool(str)){ // si le string vaut "#f" ou "#t" on l'interpretera comme etant une valeur booleenne
     leaf->fType = Boolean;
