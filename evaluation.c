@@ -180,6 +180,12 @@ bool strIsString(String_t str){
   return False;
 }
 
+bool leafIsFloat(Node_t node){
+  if(Number != node->elem->fType || node->elem->f != (float) node->elem->num)
+    return False;
+  return True;
+}
+
 bool strCmp(String_t stra, String_t strb){
   while('\0' != stra->key && '\0' != strb->key){
     if(stra->key != strb->key)

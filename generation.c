@@ -105,3 +105,20 @@ Node_t createEmptyVector(void){
   res->d = createNulNode();
   return res;
 }
+
+void deleteNode(Node_t node){
+  if(Nul == node->nType || (NULL == node->elem && NULL == node->d && NULL && node->g)) {
+    free(node);
+    return;
+  }
+  if(NULL != node->g){
+    deleteNode(node->g);
+  }
+  if(NULL != node->d){
+    deleteNode(node->d);
+  }
+  if(NULL != node->elem){
+    free(node->elem);
+  }
+  free(node);
+}

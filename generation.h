@@ -41,4 +41,9 @@ Node_t createPair(Feuille_t, Feuille_t);
 // droit un noeud Nul
 Node_t createEmptyVector(void);
 
+
+// supprime de facon safe un pointeur vers un noeud, en supprimant egalement ses
+// pointeurs
+void deleteNode(Node_t);
+
 #endif //SCHEME_INTERPRETER_GENERATION_H
