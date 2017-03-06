@@ -5,39 +5,6 @@
 #include "generation.h"
 
 
-Node_t createNulNode(void){
-  Node_t res = malloc(sizeof(struct Node));
-  res->nType = Nul;
-  res->d = NULL;
-  res->g = NULL;
-  res->g = NULL;
-  return res;
-}
-
-Node_t createEmptyNode(void) {
-  Node_t res = createNulNode();
-  res->nType = Noeud;
-  return res;
-}
-
-Node_t createElemNode(Feuille_t leaf) {
-  Node_t res = createEmptyNode();
-  res->g = createEmptyNode();
-  res->g->nType = Feuille;
-  res->g->elem = leaf;
-  res->d = createNulNode();
-
-  return res;
-}
-
-Node_t createNode(Node_t nodeA, Node_t nodeB){
-  Node_t res = createEmptyNode();
-  res->nType = Noeud;
-  res->g = nodeA;
-  res->d = nodeB;
-  return res;
-}
-
 Feuille_t createPureLeaf(void){
   Feuille_t leaf = malloc(sizeof(struct Leaf));
   leaf->str = NULL;
@@ -72,11 +39,105 @@ Feuille_t createElemLeaf(String_t str){
   return leaf;
 }
 
+Feuille_t copyLeaf(Feuille_t feuille){
+  Feuille_t res = createPureLeaf();
+  res->fType = feuille->fType;
+  res->f = feuille->f;
+  res->str = res->str;
+
+  return res;
+}
+
+Node_t createNulNode(void){
+  Node_t res = malloc(sizeof(struct Node));
+  res->nType = Nul;
+  res->d = NULL;
+  res->g = NULL;
+  res->g = NULL;
+  return res;
+}
+
+Node_t createEmptyNode(void) {
+  Node_t res = createNulNode();
+  res->nType = Noeud;
+  return res;
+}
+
 Node_t createLeaf(String_t str){
   Feuille_t leaf = createElemLeaf(str);
   Node_t res = createNulNode();
   res->nType = Feuille;
   res->elem = leaf;
+  return res;
+}
+
+Node_t createElemNode(Feuille_t leaf) {
+  Node_t res = createEmptyNode();
+  res->g = createEmptyNode();
+  res->g->nType = Feuille;
+  res->g->elem = leaf;
+  res->d = createNulNode();
+
+  return res;
+}
+
+Node_t createNode(Node_t nodeA, Node_t nodeB){
+  Node_t res = createEmptyNode();
+  res->nType = Noeud;
+  res->g = nodeA;
+  res->d = nodeB;
+  return res;
+}
+
+Node_t copyNodeLeaf(Node_t node){
+  if(Feuille != node->nType){
+    error(3);
+    return NULL;
+  }
+  Node_t res = createEmptyNode();
+  res->nType = node->nType;
+  res->elem = copyLeaf(node->elem);
+  res->d = NULL;
+  res->g = NULL;
+}
+
+Node_t copyNode(Node_t node) {
+  Node_t res = createEmptyNode();
+  if(Feuille == node->nType){
+    return copyNodeLeaf(node);
+  }
+  else if(Nul == node->nType){
+    return createNulNode();
+  }
+  else if(Noeud == node->nType){
+    // fils gauche
+    if(Feuille == node->g->nType){
+      res->g = copyNodeLeaf(node->g);
+    } else if(Nul == node->g->nType){
+      return createNulNode();
+    } else if(Noeud == node->g->nType){
+      return copyNode(node->g);
+    } else {
+      error(4);
+      return NULL;
+    }
+
+    // fils droit
+    if(Feuille == node->d->nType){
+      res->d = copyNodeLeaf(node->d);
+    } else if(Nul == node->d->nType){
+      return createNulNode();
+    } else if(Noeud == node->d->nType){
+      return copyNode(node->d);
+    } else {
+      error(4);
+      return NULL;
+    }
+  } else{
+    error(4);
+    return NULL;
+  }
+
   return res;
 }
 
