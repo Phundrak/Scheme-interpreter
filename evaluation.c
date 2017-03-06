@@ -5,30 +5,9 @@
 #include "evaluation.h"
 
 int charToInt(char c){
-  switch(c){
-    case '0':
-      return 0;
-    case '1':
-      return 1;
-    case '2':
-      return 2;
-    case '3':
-      return 3;
-    case '4':
-      return 4;
-    case '5':
-      return 5;
-    case '6':
-      return 6;
-    case '7':
-      return 7;
-    case '8':
-      return 8;
-    case '9':
-      return 9;
-    default:
-      return -1; // erreur, il ne devrait pas y avoir d'autre element possible
-  }
+  if(charIsNum(c))
+    return c-'0';
+  return error(1);
 }
 
 int strToInt(String_t str) {
@@ -50,30 +29,9 @@ int strToInt(String_t str) {
 }
 
 float charToFloat(char c){
-  switch(c){
-    case '0':
-      return 0.0;
-    case '1':
-      return 1.0;
-    case '2':
-      return 2.0;
-    case '3':
-      return 3.0;
-    case '4':
-      return 4.0;
-    case '5':
-      return 5.0;
-    case '6':
-      return 6.0;
-    case '7':
-      return 7.0;
-    case '8':
-      return 8.0;
-    case '9':
-      return 9.0;
-    default:
-      return -1; // erreur, il ne devrait pas y avoir d'autre element possible
-  }
+  if(charIsNum(c))
+    return c-'0';
+  return error(1);
 }
 
 float strToFloat(String_t str){
@@ -143,21 +101,9 @@ float strToFloat(String_t str){
 }
 
 bool charIsNum(char c){
-  switch(c){
-    case '0':
-    case '1':
-    case '2':
-    case '3':
-    case '4':
-    case '5':
-    case '6':
-    case '7':
-    case '8':
-    case '9':
-      return True;
-    default:
-      return False;
-  }
+  if('0' <= c && '9' >= c)
+    return True;
+  return False;
 }
 
 bool strIsNum(String_t str) {
