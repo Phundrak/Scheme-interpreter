@@ -12,6 +12,6 @@
 extern struct Leaf* userFunc;
 extern struct Leaf* predicats;
 
-int error(int);
+void error(int);
 
 #endif //SCHEME_INTERPRETER_GLOBALINCLUDES_H

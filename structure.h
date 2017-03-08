@@ -16,7 +16,7 @@
 
 typedef enum{False,True} bool;
 typedef enum {Noeud,Feuille,Nul} NodeType;
-typedef enum {Boolean,Pair,Vector,Symbol,Number,Character,String,Procedure} FeuilleType;
+typedef enum {Boolean,Pair,Vector,Variable,Number,Character,String,Procedure} FeuilleType;
 
 /*
  * Les types pair indiquent qu'il n'y a normalement que deux feuilles trouvables
@@ -33,7 +33,7 @@ struct CharNode{
 typedef struct CharNode* String_t;
 
 
-struct Leaf{
+typedef struct {
   FeuilleType fType; // type de la feuille
   String_t str; // valeur brute sous forme de String_t
   union{
@@ -44,8 +44,7 @@ struct Leaf{
   };
   int den; // DEPRECATED, denominateur de la fraction du rationnel
   // le membre functPtr ne doit etre utilise que si la feuille est une procedure
-};
-typedef struct Leaf Feuil;
+} Feuil;
 typedef Feuil* Feuille_t;
 
 struct Node{
@@ -55,7 +54,6 @@ struct Node{
   struct Node* d; // pointeur vers le fils droit (NULL si nType==nul || nType==feuille)
 };
 typedef struct Node* Node_t;
-typedef Node_t List;
 
 /********************************************************************************
  *
@@ -63,6 +61,6 @@ typedef Node_t List;
  *
  *******************************************************************************/
 
-
+String_t invertStringt(String_t);
 
 #endif //SCHEME_INTERPRETER_STRUCTURE_H

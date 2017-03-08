@@ -4,7 +4,7 @@
 
 #include "globalIncludes.h"
 
-int error(int n){
+void error(int n){
   printf("Error code: %d",n);
   /*
   switch(n){
@@ -17,5 +17,5 @@ int error(int n){
   default:
     printf("Undefined error\n");
   }*/
-  return -1;
+  return;
 }

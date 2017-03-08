@@ -6,7 +6,7 @@
 
 
 Feuille_t createPureLeaf(void){
-  Feuille_t leaf = malloc(sizeof(struct Leaf));
+  Feuille_t leaf = malloc(sizeof(Feuil));
   leaf->str = NULL;
 
   return leaf;
@@ -16,7 +16,6 @@ Feuille_t createElemLeaf(String_t str){
   Feuille_t leaf = createPureLeaf();
   leaf->str = str;
   leaf->f = 0;
-  leaf->num = 0;
   leaf->den = 1;
 
   if(True == strIsNum(str)) { // si str represente un nombre, on initialise les membres associes
@@ -118,7 +117,7 @@ Node_t copyNode(Node_t node) {
     } else if(Noeud == node->g->nType){
       return copyNode(node->g);
     } else {
-      error(4);
+      error(3);
       return NULL;
     }
 
@@ -130,11 +129,11 @@ Node_t copyNode(Node_t node) {
     } else if(Noeud == node->d->nType){
       return copyNode(node->d);
     } else {
-      error(4);
+      error(3);
       return NULL;
     }
   } else{
-    error(4);
+    error(3);
     return NULL;
   }
 

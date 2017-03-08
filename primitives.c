@@ -4,16 +4,23 @@
 
 #include "primitives.h"
 
-List car(List n){
+Node_t car(Node_t n){
   return n->g;
 }
-List cdr(List n){
+Node_t cdr(Node_t n){
   return n->d;
 }
-List cons(List elem, List liste){
+Node_t cons(Node_t elem, Node_t liste){
   // creation d'un  nouveau noeud, elem devient son fils gauche, liste son fils droit
-  List p = malloc(sizeof(struct Node));
+  Node_t p = malloc(sizeof(struct Node));
   p->g = elem;
   p->d = liste;
   return p;
+}
+
+Node_t eval(Node_t node){
+  if(Feuille == node->nType)
+    return node;
+  else if(Noeud == node->nType && Feuille == node->g->nType && Nul == node->d->nType)
+    return node->g;
 }

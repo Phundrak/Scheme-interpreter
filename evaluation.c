@@ -7,7 +7,8 @@
 int charToInt(char c){
   if(charIsNum(c))
     return c-'0';
-  return error(1);
+  error(1);
+  return -1;
 }
 
 int strToInt(String_t str) {
@@ -31,7 +32,8 @@ int strToInt(String_t str) {
 float charToFloat(char c){
   if(charIsNum(c))
     return c-'0';
-  return error(1);
+  error(1);
+  return -1;
 }
 
 float strToFloat(String_t str){

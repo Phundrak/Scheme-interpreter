@@ -9,9 +9,9 @@
 #include "structure.h"
 
 
-List car(List);
-List cdr(List);
-List cons(List, List);
+Node_t car(Node_t);
+Node_t cdr(Node_t);
+Node_t cons(Node_t, Node_t);
 
 
 #endif //SCHEME_INTERPRETER_PREDICATES_H
