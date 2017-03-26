@@ -1,26 +1,41 @@
-//
-// Created by Drak-pa on 2017/03/01.
-//
+#include "stdafx.h"
 
-#include "primitives.h"
-
-Node_t car(Node_t n){
-  return n->g;
-}
-Node_t cdr(Node_t n){
-  return n->d;
-}
-Node_t cons(Node_t elem, Node_t liste){
-  // creation d'un  nouveau noeud, elem devient son fils gauche, liste son fils droit
-  Node_t p = malloc(sizeof(struct Node));
-  p->g = elem;
-  p->d = liste;
-  return p;
+pNode car(pNode n){
+  return n->fg;
 }
 
-Node_t eval(Node_t node){
-  if(Feuille == node->nType)
-    return node;
-  else if(Noeud == node->nType && Feuille == node->g->nType && Nul == node->d->nType)
-    return node->g;
+pNode cdr(pNode n){
+  return n->fd;
+}
+
+pNode cons(pNode a, pNode b){
+  pNode n = newEmptyNode();
+  (*n).ntype = Node;
+  (*n).fg = a;
+  (*n).fd = b;
+  return n;
+}
+
+pNode add(pNode n){
+  (*n).ntype = Leaf;
+  (*n).ftype = Num;
+  (*n).f = 0;
+  pNode num = n->fd;
+  while(num){
+    (*num).fg = eval(num->fg);
+    if(Num != n->fg->ftype){
+      printf("Error: number expected. Cannot add a non-number.\n\t");
+      printVal(n->fg);
+    }
+    (*n).f += num->fg->f;
+    num = num->fd;
+  }
+  pNode tmp = copyNode(n->fg);
+  deleteNode(n->fd);
+  deleteNode(n->fg);
+  n = copyNode(tmp);
+  (*n).fg = (pNode)0;
+  (*n).fd = (pNode)0;
+  deleteNode(tmp);
+  return n;
 }

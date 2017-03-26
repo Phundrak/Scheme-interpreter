@@ -1,66 +1,69 @@
+#ifndef STRUCTURE_H
+#define STRUCTURE_H
 
-//
-// Created by Drak-pa on 2017/03/01.
-//
+#include "stdafx.h"
 
-#ifndef SCHEME_INTERPRETER_STRUCTURE_H
-#define SCHEME_INTERPRETER_STRUCTURE_H
+	  /************************************************
+	   *                  Structures
+	   ***********************************************/
 
-#include "globalIncludes.h"
-
-/********************************************************************************
- *
- * Data Structure
- *
- *******************************************************************************/
-
-typedef enum{False,True} bool;
-typedef enum {Noeud,Feuille,Nul} NodeType;
-typedef enum {Boolean,Pair,Vector,Variable,Number,Character,String,Procedure} FeuilleType;
-
-/*
- * Les types pair indiquent qu'il n'y a normalement que deux feuilles trouvables
- * dans le fils droit du noeud parent de cette feuille. Si c'est faux, alors on a
- * une erreur.
- * Les types vecteurs indiquent que les elements contenus dans le fils droit du
- * noeud parent de cette feuille constituent les elements d'une liste.
- */
+typedef enum{False, True} bool;
+typedef enum{Node,Leaf,Nul} nType;
+typedef enum{Bool,Pair,List,Num,Char,String,Proc} fType;
 
 struct CharNode{
   char key;
-  struct CharNode* next;
+  struct CharNode *next;
 };
 typedef struct CharNode* String_t;
 
-
-typedef struct {
-  FeuilleType fType; // type de la feuille
-  String_t str; // valeur brute sous forme de String_t
-  union{
-    char c; // valeur de la feuille s'ill s'agit d'un char
-    bool b; // valeur booleenne (false = 0, true = 1)
-    float f; // valeur float du rationnel
-    int num; // DEPRECATED, numerateur de la fraction du rationnel
-  };
-  int den; // DEPRECATED, denominateur de la fraction du rationnel
-  // le membre functPtr ne doit etre utilise que si la feuille est une procedure
-} Feuil;
-typedef Feuil* Feuille_t;
-
 struct Node{
-  NodeType nType; // type du noeud
-  Feuille_t elem; // pointeur vers les valeurs en tant que feuille (NULL si nType==nul || nType==node)
-  struct Node* g; // pointeur vers le fils gauche (NULL si nType==nul || nType==feuille)
-  struct Node* d; // pointeur vers le fils droit (NULL si nType==nul || nType==feuille)
+  nType ntype;
+  fType ftype; // type de la valeur
+  union{
+    char c; // char seul
+    bool b; // valeur booleenne (False = 0, True = 1)
+    float f; // valeur flottante
+    String_t s; // pointeur vers un string
+  };
+  struct Node* fg; // pointeur vers le fils gauche
+  struct Node* fd; // pointeur vers le fils droit
 };
-typedef struct Node* Node_t;
+typedef struct Node Node_t;
+typedef struct Node* pNode;
 
-/********************************************************************************
- *
- * Functions
- *
- *******************************************************************************/
 
-String_t invertStringt(String_t);
+          /************************************************
+	   *                  Functions
+	   ***********************************************/
 
-#endif //SCHEME_INTERPRETER_STRUCTURE_H
+// cree un noeud vierge de type Nul
+pNode newEmptyNode(void);
+// cree un noeud ayant pour enfants les deux arguments
+// equivalent du cons() de primitives.h
+pNode newNode(pNode,pNode);
+// cree une nouvelle feuille a partir d'un String_t
+pNode newLeaf(String_t);
+// renvoie un pointeur vers une copie exacte du noeud
+// passe en argument (ne copie pas ses elements enfants)
+pNode copyNode(pNode);
+// renvoie un pointeur vers une copie de l'arbre passe
+// en argument
+pNode copyTree(pNode);
+// cree un arbre representant une paire composee des
+// deux arguments
+pNode newPair(pNode, pNode);
+
+// methode pour supprimer de facon securisee un arbre
+void deleteNode(pNode);
+// methode pour supprimer de facon securisee un String_t
+void deleteString(String_t);
+
+// cree un nouveau pointeur vers un struct CharNode vierge
+String_t newString(void);
+
+// transforme un arbre en un noeud avec pour fils gauche
+// la valeur de l'arbre et pour fils droit un noeud vide
+pNode eval(pNode);
+
+#endif

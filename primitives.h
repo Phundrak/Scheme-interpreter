@@ -1,17 +1,16 @@
-//
-// Created by Drak-pa on 2017/03/01.
-//
+#ifndef PRIMITIVES_H
+#define PRIMITIVES_H
 
-#ifndef SCHEME_INTERPRETER_PREDICATES_H
-#define SCHEME_INTERPRETER_PREDICATES_H
+#include "stdafx.h"
 
-#include "globalIncludes.h"
-#include "structure.h"
+// renvoie le fils gauche de l'arbre passe en argument
+pNode car(pNode);
+// renvoie le fils droit de l'arbre passe en argument
+pNode cdr(pNode);
+// renvoie un arbre avec le premier argument comme fils gauche, le second comme fils droit
+pNode cons(pNode,pNode);
 
+// additionne tous les fils droits de l'arbre passe en argument
+pNode add(pNode);
 
-Node_t car(Node_t);
-Node_t cdr(Node_t);
-Node_t cons(Node_t, Node_t);
-
-
-#endif //SCHEME_INTERPRETER_PREDICATES_H
+#endif
